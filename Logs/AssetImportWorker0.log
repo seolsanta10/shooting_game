@@ -7,9 +7,9 @@ Darwin version:          25.0.0
 Architecture:            arm64
 Running under Rosetta:   NO
 Available memory:        49152 MB
-Date:                    2026-01-12T00:55:27Z
+Date:                    2026-01-12T14:59:07Z
 [Licensing::Module] Trying to connect to existing licensing client channel...
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-shome" at "2026-01-12T00:55:27.025126Z"
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-shome" at "2026-01-12T14:59:07.831256Z"
 
 COMMAND LINE ARGUMENTS:
 /Applications/Unity/Hub/Editor/6000.3.3f1/Unity.app/Contents/MacOS/Unity
@@ -23,7 +23,7 @@ AssetImportWorker0
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-54206
+59679
 -licensingIpc
 LicenseClient-shome
 -job-worker-count
@@ -72,7 +72,7 @@ Successfully changed project path to: /Users/shome/TERRIFYING_FLIGHT
     "memorysetup-temp-allocator-size-gfx=262144"
 Player connection [8799193088]  Target information:
 
-Player connection [8799193088]  * "[IP] 192.168.219.50 [Port] 0 [Flags] 2 [Guid] 2952878793 [EditorId] 2952878793 [Version] 1048832 [Id] OSXEditor(0,MACSEOLui-MacBookPro.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+Player connection [8799193088]  * "[IP] 192.168.0.44 [Port] 0 [Flags] 2 [Guid] 3392994113 [EditorId] 3392994113 [Version] 1048832 [Id] OSXEditor(0,MACSEOLui-MacBookPro.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
 
 Player connection [8799193088] Host joined multi-casting on [225.0.0.222:54997]...
 Player connection [8799193088] Host joined alternative multi-casting on [225.0.0.222:34997]...
@@ -87,7 +87,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 0.85 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 0.71 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.3.3f1 (ef04196de0d6)
 [Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.3.3f1/Unity.app/Contents/Resources/UnitySubsystems
@@ -108,54 +108,54 @@ Initialize mono
 Mono path[0] = '/Applications/Unity/Hub/Editor/6000.3.3f1/Unity.app/Contents/Resources/Scripting/Managed'
 Mono path[1] = '/Applications/Unity/Hub/Editor/6000.3.3f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
 Mono config path = '/Applications/Unity/Hub/Editor/6000.3.3f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56159
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56531
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: /Applications/Unity/Hub/Editor/6000.3.3f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: /Applications/Unity/Hub/Editor/6000.3.3f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
-Registered in 0.000272 seconds.
+Registered in 0.000304 seconds.
 [Licensing::Client] Handshaking with LicensingClient:
   Version:                 1.17.4+4293ba1
-  Session Id:              e8edf664e7094acdbedb555600008048
+  Session Id:              b9bae4c5cfd5439a88cd916f40bc75b4
   Correlation Id:          f716c7f1cf0d14f36f073095f0b5f838
-  External correlation Id: 4025123929000358041
+  External correlation Id: 8010855392200865938
   Machine Id:              Y/F8C0TnnRx6ZzjW93JyZk1ARBI=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-shome" (connect: 0.00s, validation: 0.00s, handshake: 0.43s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-shome-notifications" at "2026-01-12T00:55:27.46065Z"
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-shome" (connect: 0.00s, validation: 0.00s, handshake: 0.44s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-shome-notifications" at "2026-01-12T14:59:08.268368Z"
 [Licensing::Module] Licensing Background thread has ended after 0.44s
-- Loaded All Assemblies, in  0.178 seconds
+- Loaded All Assemblies, in  0.177 seconds
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.229 seconds
+- Finished resetting the current domain, in  0.230 seconds
 Domain Reload Profiling: 407ms
-	BeginReloadAssembly (43ms)
+	BeginReloadAssembly (41ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (0ms)
-	RebuildCommonClasses (18ms)
+	RebuildCommonClasses (19ms)
 	RebuildNativeTypeToScriptingClass (7ms)
 	initialDomainReloadingComplete (20ms)
 	LoadAllAssembliesAndSetupDomain (90ms)
-		LoadAssemblies (43ms)
+		LoadAssemblies (41ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
 		AnalyzeDomain (89ms)
 			TypeCache.Refresh (88ms)
-				TypeCache.ScanAssembly (81ms)
+				TypeCache.ScanAssembly (82ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (229ms)
+	FinalizeReload (230ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (205ms)
+		SetupLoadedEditorAssemblies (204ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (22ms)
 			SetLoadedEditorAssemblies (2ms)
 			BeforeProcessingInitializeOnLoad (58ms)
-			ProcessInitializeOnLoadAttributes (89ms)
-			ProcessInitializeOnLoadMethodAttributes (34ms)
+			ProcessInitializeOnLoadAttributes (87ms)
+			ProcessInitializeOnLoadMethodAttributes (35ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -171,48 +171,66 @@ Begin MonoManager ReloadAssembly
   Product: Unity Personal
   Type: Assigned
   Expiration: Unlimited
-- Loaded All Assemblies, in  0.311 seconds
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.322 seconds
 Refreshing native plugins compatible for Editor in 0.21 ms, found 1 plugins.
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: Auto-discovered 18 tools and 14 resources (32 total handlers)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+MCPForUnity.Editor.Helpers.McpLog:Info (string,bool) (at Assets/MCPForUnity/Editor/Helpers/McpLog.cs:40)
+MCPForUnity.Editor.Tools.CommandRegistry:AutoDiscoverCommands () (at Assets/MCPForUnity/Editor/Tools/CommandRegistry.cs:101)
+MCPForUnity.Editor.Tools.CommandRegistry:Initialize () (at Assets/MCPForUnity/Editor/Tools/CommandRegistry.cs:50)
+MCPForUnity.Editor.Services.Transport.TransportCommandDispatcher:EnsureInitialised () (at Assets/MCPForUnity/Editor/Services/Transport/TransportCommandDispatcher.cs:200)
+MCPForUnity.Editor.Services.Transport.TransportCommandDispatcher:.cctor () (at Assets/MCPForUnity/Editor/Services/Transport/TransportCommandDispatcher.cs:73)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[]) (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorAssemblies.cs:124)
+
+(Filename: Assets/MCPForUnity/Editor/Helpers/McpLog.cs Line: 40)
+
 Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.376 seconds
-Domain Reload Profiling: 687ms
-	BeginReloadAssembly (63ms)
+- Finished resetting the current domain, in  0.737 seconds
+Domain Reload Profiling: 1059ms
+	BeginReloadAssembly (62ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (3ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (13ms)
+		CreateAndSetChildDomain (12ms)
 	RebuildCommonClasses (19ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (17ms)
-	LoadAllAssembliesAndSetupDomain (205ms)
-		LoadAssemblies (127ms)
+	RebuildNativeTypeToScriptingClass (6ms)
+	initialDomainReloadingComplete (16ms)
+	LoadAllAssembliesAndSetupDomain (219ms)
+		LoadAssemblies (133ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (106ms)
-			TypeCache.Refresh (83ms)
-				TypeCache.ScanAssembly (76ms)
-			BuildScriptInfoCaches (16ms)
+		AnalyzeDomain (113ms)
+			TypeCache.Refresh (88ms)
+				TypeCache.ScanAssembly (79ms)
+			BuildScriptInfoCaches (18ms)
 			ResolveRequiredComponents (5ms)
-	FinalizeReload (376ms)
+	FinalizeReload (737ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (290ms)
+		SetupLoadedEditorAssemblies (652ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (1ms)
 			SetLoadedEditorAssemblies (2ms)
-			BeforeProcessingInitializeOnLoad (82ms)
-			ProcessInitializeOnLoadAttributes (176ms)
-			ProcessInitializeOnLoadMethodAttributes (29ms)
+			BeforeProcessingInitializeOnLoad (87ms)
+			ProcessInitializeOnLoadAttributes (532ms)
+			ProcessInitializeOnLoadMethodAttributes (30ms)
 			AfterProcessingInitializeOnLoad (1ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (1ms)
+		AwakeInstancesAfterBackupRestoration (2ms)
 WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
 WARNING: Shader Did you use #pragma only_renderers and omit this platform?
 WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
@@ -221,45 +239,315 @@ WARNING: Shader Did you use #pragma only_renderers and omit this platform?
 WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
 Launching external process: /Applications/Unity/Hub/Editor/6000.3.3f1/Unity.app/Contents/Helpers/UnityShaderCompiler
 Launched and connected shader compiler UnityShaderCompiler after 0.02 seconds
-Refreshing native plugins compatible for Editor in 0.22 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 0.24 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 17 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6186 unused Assets / (3.9 MB). Loaded Objects now: 6981.
-Memory consumption went from 148.6 MB to 144.7 MB.
-Total: 4.620667 ms (FindLiveObjects: 0.276958 ms CreateObjectMapping: 0.144625 ms MarkObjects: 3.311792 ms  DeleteObjects: 0.887042 ms)
+Unloading 6370 unused Assets / (4.0 MB). Loaded Objects now: 7165.
+Memory consumption went from 149.7 MB to 145.7 MB.
+Total: 5.333583 ms (FindLiveObjects: 0.300500 ms CreateObjectMapping: 0.102042 ms MarkObjects: 3.913042 ms  DeleteObjects: 1.017625 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 32560.299301 seconds.
-  path: Assets/Settings/DefaultVolumeProfile.asset
-  artifactKey: Guid(ab09877e2e707104187f6f83e2f62510) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Settings/DefaultVolumeProfile.asset using Guid(ab09877e2e707104187f6f83e2f62510) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ab21f05c95e35f2143d379ff70b8c61a') in 0.028319875 seconds
+  Time since last request: 59295.521051 seconds.
+  path: Assets/MCPForUnity/Editor/Services/Transport/IMcpTransportClient.cs
+  artifactKey: Guid(042446a50a4744170bb294acf827376f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Services/Transport/IMcpTransportClient.cs using Guid(042446a50a4744170bb294acf827376f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'eb996fdc7cb7682436a013c3d3061b04') in 0.030577042 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/MCPForUnity/Editor/Services/PackageUpdateService.cs
+  artifactKey: Guid(7c3c2304b14e9485ca54182fad73b035) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Services/PackageUpdateService.cs using Guid(7c3c2304b14e9485ca54182fad73b035) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '0e17acf5c9bc40c611b284891e2208a7') in 0.001431 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/MCPForUnity/Editor/Services/PathResolverService.cs
+  artifactKey: Guid(00a6188fd15a847fa8cc7cb7a4ce3dce) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Services/PathResolverService.cs using Guid(00a6188fd15a847fa8cc7cb7a4ce3dce) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '7cdf97664bc7863e373c342ec2f9532f') in 0.001274041 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/MCPForUnity/Editor/Services/StdioBridgeReloadHandler.cs
+  artifactKey: Guid(6e603c72a87974cf5b495cd683165fbf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Services/StdioBridgeReloadHandler.cs using Guid(6e603c72a87974cf5b495cd683165fbf) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'cef34cdd4536833bdc0cd202a1d47f42') in 0.001227791 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/MCPForUnity/Editor/Resources/McpForUnityResourceAttribute.cs
+  artifactKey: Guid(4c2d60f570f3d4bd2a6a2c1293094be3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Resources/McpForUnityResourceAttribute.cs using Guid(4c2d60f570f3d4bd2a6a2c1293094be3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'f6d8d7206fd35e7e903f8eed744b541b') in 0.001157041 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/MCPForUnity/Editor/Setup/SetupWindowService.cs
+  artifactKey: Guid(d1bf468667bb649989e3ef53dafddea6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Setup/SetupWindowService.cs using Guid(d1bf468667bb649989e3ef53dafddea6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ea8eaee8ea437debc8bd8209812bc7a2') in 0.001123625 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000039 seconds.
-  path: Assets/Scripts/AutoCreatePlanetAndPlayer.cs
-  artifactKey: Guid(dd78c27177f5c4740a34c30adc39b1cc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Scripts/AutoCreatePlanetAndPlayer.cs using Guid(dd78c27177f5c4740a34c30adc39b1cc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '184536a122e3743b09664ff9650bce93') in 0.004608875 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
-  artifactKey: Guid(18dc0cd2c080841dea60987a38ce93fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Settings/UniversalRenderPipelineGlobalSettings.asset using Guid(18dc0cd2c080841dea60987a38ce93fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '5513f117eb6f1025128e5a825b036ead') in 0.034376334 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Settings/PC_RPAsset.asset
-  artifactKey: Guid(4b83569d67af61e458304325a23e5dfd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Settings/PC_RPAsset.asset using Guid(4b83569d67af61e458304325a23e5dfd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '1fcdbb94a50ec9b4465061b036e17c49') in 0.015591083 seconds
+  path: Assets/MCPForUnity/Editor/Constants
+  artifactKey: Guid(f7e009cbf3e74f6c987331c2b438ec59) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Constants using Guid(f7e009cbf3e74f6c987331c2b438ec59) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '513f1736e866af3b14fa52b5e45fbeeb') in 0.00123125 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/MCPForUnity/Editor/Windows/MCPSetupWindow.uss
+  artifactKey: Guid(b4426760e34ff484a8ed955e588b570b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Windows/MCPSetupWindow.uss using Guid(b4426760e34ff484a8ed955e588b570b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '31218b1ac56bed79aa9eefa9ced6fd17') in 0.013081084 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000070 seconds.
+  path: Assets/MCPForUnity/Editor/Clients/Configurators/CherryStudioConfigurator.cs
+  artifactKey: Guid(6de06c6bb0399154d840a1e4c84be869) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Clients/Configurators/CherryStudioConfigurator.cs using Guid(6de06c6bb0399154d840a1e4c84be869) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a76cadf35cf839c9b066044f3b6e2ea5') in 0.001171041 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/MCPForUnity/Editor/Helpers/Pagination.cs
+  artifactKey: Guid(745564d5894d74c0ca24db39c77bab2c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Helpers/Pagination.cs using Guid(745564d5894d74c0ca24db39c77bab2c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'bc6675d2b367a56c1f078c3c2f1babfe') in 0.001023958 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/MCPForUnity/Editor/Constants/EditorPrefKeys.cs
+  artifactKey: Guid(7317786cfb9304b0db20ca73a774b9fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Constants/EditorPrefKeys.cs using Guid(7317786cfb9304b0db20ca73a774b9fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '9b858d9286e6b2b01368de0d4975296e') in 0.001227584 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/MCPForUnity/Editor/Clients/Configurators/WindsurfConfigurator.cs
+  artifactKey: Guid(b528971e189f141d38db577f155bd222) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Clients/Configurators/WindsurfConfigurator.cs using Guid(b528971e189f141d38db577f155bd222) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '264096a8d43cf477fe4b43177cf4cb13') in 0.001124709 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/MCPForUnity/Runtime/Serialization
+  artifactKey: Guid(c7e33d6224fe6473f9bc69fe6d40e508) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Runtime/Serialization using Guid(c7e33d6224fe6473f9bc69fe6d40e508) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '5fc1012218ed709ea260b34c6e3a3e5a') in 0.00090875 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/MCPForUnity/Editor/Windows/MCPForUnityEditorWindow.uss
+  artifactKey: Guid(8f9b5e0c2d3c4e5f6a7b8c9d0e1f2a3c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Windows/MCPForUnityEditorWindow.uss using Guid(8f9b5e0c2d3c4e5f6a7b8c9d0e1f2a3c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '1344c964df2a32a4adb2504d1f4fa3fe') in 0.001858708 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/MCPForUnity/Editor/Windows/Components/Connection
+  artifactKey: Guid(23563b155b001a14c8263aa095cd527b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Windows/Components/Connection using Guid(23563b155b001a14c8263aa095cd527b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '8670ee2f5df934c91a85f7f51a3fdd72') in 0.000916 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/MCPForUnity/package.json
+  artifactKey: Guid(a2f7ae0675bf4fb478a0a1df7a3f6c64) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/package.json using Guid(a2f7ae0675bf4fb478a0a1df7a3f6c64) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'eb1f041518243e0a687817efe1cf6203') in 0.001032 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/MCPForUnity/Editor/Services/MCPServiceLocator.cs
+  artifactKey: Guid(276d6a9f9a1714ead91573945de78992) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Services/MCPServiceLocator.cs using Guid(276d6a9f9a1714ead91573945de78992) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'bc90475b87753856849b8626782ce700') in 0.00119825 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/MCPForUnity/Editor/Clients/Configurators/AntigravityConfigurator.cs
+  artifactKey: Guid(331b33961513042e3945d0a1d06615b5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Clients/Configurators/AntigravityConfigurator.cs using Guid(331b33961513042e3945d0a1d06615b5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '5d6e1070ae123b08b8076c5fa3544e72') in 0.000995042 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/MCPForUnity/Editor/Resources/Project/Layers.cs
+  artifactKey: Guid(959ee428299454ac19a636275208ca00) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Resources/Project/Layers.cs using Guid(959ee428299454ac19a636275208ca00) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '6b731925831d378c23b5f34a04912070') in 0.001054459 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/MCPForUnity/Editor/Tools/Vfx/TrailRead.cs
+  artifactKey: Guid(2921f0042777b4ebbaec4c79c60908a1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Tools/Vfx/TrailRead.cs using Guid(2921f0042777b4ebbaec4c79c60908a1) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '82cd2a217ea6e7d12e052bb194950e8e') in 0.00128725 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/MCPForUnity/Editor/McpCiBoot.cs
+  artifactKey: Guid(ef9dca277ab34ba1b136d8dcd45de948) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/McpCiBoot.cs using Guid(ef9dca277ab34ba1b136d8dcd45de948) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'ccf36eb9217d739c9de75172f6777bf8') in 0.001073958 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/MCPForUnity/Editor/Helpers/McpLog.cs
+  artifactKey: Guid(9e2c3f8a4f4f48d8a4c1b7b8e3f5a1c2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Helpers/McpLog.cs using Guid(9e2c3f8a4f4f48d8a4c1b7b8e3f5a1c2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '3c8f48794c605b115d0936de559b33f3') in 0.001125625 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/MCPForUnity/Editor/Services/Transport/Transports/WebSocketTransportClient.cs
+  artifactKey: Guid(044c8f7beb4af4a77a14d677190c21dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Services/Transport/Transports/WebSocketTransportClient.cs using Guid(044c8f7beb4af4a77a14d677190c21dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '57191cbdbb2f996938592b7fc02aa8b0') in 0.000944791 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/MCPForUnity/Editor/Clients/Configurators/TraeConfigurator.cs
+  artifactKey: Guid(b3ab39e22ae0948ab94beae307f9902e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Clients/Configurators/TraeConfigurator.cs using Guid(b3ab39e22ae0948ab94beae307f9902e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '3081d75b756f0113df915e5b13f12e9d') in 0.000987458 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/MCPForUnity/Editor/Tools/Vfx/LineRead.cs
+  artifactKey: Guid(df77cf0ca14344b0cb2f1b84c5eb15e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Tools/Vfx/LineRead.cs using Guid(df77cf0ca14344b0cb2f1b84c5eb15e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '0dfb52729391fc4106e5f189babb01c6') in 0.001063167 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/MCPForUnity/Editor/Tools/GameObjects/GameObjectDuplicate.cs
+  artifactKey: Guid(698728d56425a47af92a45377031a48b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Tools/GameObjects/GameObjectDuplicate.cs using Guid(698728d56425a47af92a45377031a48b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: '3a7ec80eaf6608e4909380b25fc35a00') in 0.001217625 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/MCPForUnity/Editor/Services/TestRunStatus.cs
+  artifactKey: Guid(b3d140c288f6e4b6aa2b7e8181a09c1e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Services/TestRunStatus.cs using Guid(b3d140c288f6e4b6aa2b7e8181a09c1e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a7e794550e795bc933c52d4c01ffba12') in 0.001141667 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/MCPForUnity/Editor/Windows/Components/Settings/McpSettingsSection.uxml
+  artifactKey: Guid(405ae4db7c048f542ac9b8f83099bc45) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/MCPForUnity/Editor/Windows/Components/Settings/McpSettingsSection.uxml using Guid(405ae4db7c048f542ac9b8f83099bc45) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (artifact id: 'a4ac82b49517191b4efaf9c62770c962') in 0.014925416 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Thread 0x17e547000 may have been prematurely finalized
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.302 seconds
+Refreshing native plugins compatible for Editor in 0.20 ms, found 1 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: Auto-discovered 18 tools and 14 resources (32 total handlers)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+MCPForUnity.Editor.Helpers.McpLog:Info (string,bool) (at Assets/MCPForUnity/Editor/Helpers/McpLog.cs:40)
+MCPForUnity.Editor.Tools.CommandRegistry:AutoDiscoverCommands () (at Assets/MCPForUnity/Editor/Tools/CommandRegistry.cs:101)
+MCPForUnity.Editor.Tools.CommandRegistry:Initialize () (at Assets/MCPForUnity/Editor/Tools/CommandRegistry.cs:50)
+MCPForUnity.Editor.Services.Transport.TransportCommandDispatcher:EnsureInitialised () (at Assets/MCPForUnity/Editor/Services/Transport/TransportCommandDispatcher.cs:200)
+MCPForUnity.Editor.Services.Transport.TransportCommandDispatcher:.cctor () (at Assets/MCPForUnity/Editor/Services/Transport/TransportCommandDispatcher.cs:73)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[]) (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorAssemblies.cs:124)
+
+(Filename: Assets/MCPForUnity/Editor/Helpers/McpLog.cs Line: 40)
+
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.761 seconds
+Domain Reload Profiling: 1065ms
+	BeginReloadAssembly (84ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (3ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (23ms)
+	RebuildCommonClasses (19ms)
+	RebuildNativeTypeToScriptingClass (6ms)
+	initialDomainReloadingComplete (10ms)
+	LoadAllAssembliesAndSetupDomain (184ms)
+		LoadAssemblies (130ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (79ms)
+			TypeCache.Refresh (4ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (69ms)
+			ResolveRequiredComponents (5ms)
+	FinalizeReload (762ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (684ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (1ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (86ms)
+			ProcessInitializeOnLoadAttributes (558ms)
+			ProcessInitializeOnLoadMethodAttributes (35ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
+WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+Refreshing native plugins compatible for Editor in 0.36 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 17 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6366 unused Assets / (3.3 MB). Loaded Objects now: 7184.
+Memory consumption went from 164.5 MB to 161.2 MB.
+Total: 5.573667 ms (FindLiveObjects: 0.313208 ms CreateObjectMapping: 0.110292 ms MarkObjects: 4.205042 ms  DeleteObjects: 0.944916 ms)
+
+Prepare: number of updated asset objects reloaded= 0
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
 AssetImportWorker is now disconnected from the server
 Process exiting

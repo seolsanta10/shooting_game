@@ -169,11 +169,11 @@ public class FlightSimulationController : MonoBehaviour
         {
             if (keyboard.qKey.isPressed)
             {
-                qeRotation = 1f; // 오른쪽 회전
+                qeRotation = -1f; // 왼쪽 회전
             }
             else if (keyboard.eKey.isPressed)
             {
-                qeRotation = -1f; // 왼쪽 회전
+                qeRotation = 1f; // 오른쪽 회전
             }
         }
         
