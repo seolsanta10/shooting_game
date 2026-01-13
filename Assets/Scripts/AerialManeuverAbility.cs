@@ -75,7 +75,7 @@ public class AerialManeuverAbility : MonoBehaviour
         // 카메라 찾기
         if (cameraFollow == null)
         {
-            cameraFollow = FindObjectOfType<CameraFollow>();
+            cameraFollow = FindAnyObjectByType<CameraFollow>();
         }
         
         // 행성 중심 찾기
@@ -121,7 +121,7 @@ public class AerialManeuverAbility : MonoBehaviour
     bool IsEnemyTrackingPlayer()
     {
         // EnemyController를 가진 모든 적 찾기
-        EnemyController[] enemies = FindObjectsOfType<EnemyController>();
+        EnemyController[] enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
         
         foreach (EnemyController enemy in enemies)
         {
@@ -143,7 +143,7 @@ public class AerialManeuverAbility : MonoBehaviour
     /// </summary>
     Transform FindNearestEnemy()
     {
-        EnemyController[] enemies = FindObjectsOfType<EnemyController>();
+        EnemyController[] enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
         Transform nearestEnemy = null;
         float nearestDistance = float.MaxValue;
         

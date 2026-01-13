@@ -19,11 +19,11 @@ public class SetupRadarPanel : MonoBehaviour
                 rectTransform.anchoredPosition = new Vector2(-20f, -20f);
                 rectTransform.sizeDelta = new Vector2(200f, 200f);
                 
-                // 배경색 설정
+                // 배경색 설정: 검정색 + 30% 투명도 (RadarSystem에서 덮어쓸 예정이지만 일단 설정)
                 Image bgImage = radarPanelObj.GetComponent<Image>();
                 if (bgImage != null)
                 {
-                    bgImage.color = new Color(0f, 0f, 0f, 0.8f); // 반투명 검은색
+                    bgImage.color = new Color(0f, 0f, 0f, 0.3f); // 검정색, 30% 투명도
                 }
             }
         }

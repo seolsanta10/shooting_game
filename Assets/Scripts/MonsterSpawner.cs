@@ -26,6 +26,7 @@ public class MonsterSpawner : MonoBehaviour
         if (planetCenter == null)
         {
             GameObject ground = GameObject.Find("Ground");
+            if (ground == null) ground = GameObject.Find("지구");
             if (ground != null)
             {
                 planetCenter = ground.transform;

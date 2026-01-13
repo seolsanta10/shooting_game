@@ -8,6 +8,16 @@ public class MissileLauncher : MonoBehaviour
     public GameObject missilePrefab;
     public Transform firePoint;
     public float fireRate = 0.5f;
+
+    [Tooltip("미사일 속도 최소값(플레이어보다 항상 빠르게 유지용)")]
+    public float missileMinSpeed = 30f;
+
+    [Tooltip("플레이어의 최대 속도 대비 미사일 속도 배율 (예: 1.5면 50% 더 빠름)")]
+    public float missileSpeedMultiplierOfPlayerMax = 1.5f;
+
+    [Header("스킬(아이템) 효과")]
+    [Tooltip("미사일 크기 배율 (노랑 아이템: 3배)")]
+    public float missileScaleMultiplier = 1f;
     
     private float nextFireTime = 0f;
     private Mouse mouse;
@@ -15,6 +25,13 @@ public class MissileLauncher : MonoBehaviour
     void Start()
     {
         mouse = Mouse.current;
+
+        // 전역 프리팹 설정(있으면) 적용
+        GamePrefabSettings settings = GamePrefabSettings.LoadOrNull();
+        if (settings != null && missilePrefab == null && settings.playerMissilePrefab != null)
+        {
+            missilePrefab = settings.playerMissilePrefab;
+        }
         
         // 발사점이 없으면 자동으로 생성
         if (firePoint == null)
@@ -73,6 +90,7 @@ public class MissileLauncher : MonoBehaviour
         
         // Ground 찾기
         GameObject ground = GameObject.Find("Ground");
+        if (ground == null) ground = GameObject.Find("지구");
         if (ground != null)
         {
             Transform groundCenter = ground.transform;
@@ -92,14 +110,26 @@ public class MissileLauncher : MonoBehaviour
         
         GameObject missile = Instantiate(missilePrefab, firePoint.position, missileRotation);
         
-        // 미사일 컴포넌트 추가
-        if (missile.GetComponent<Missile>() == null)
+        // 미사일 컴포넌트 추가/가져오기
+        Missile missileComp = missile.GetComponent<Missile>();
+        if (missileComp == null) missileComp = missile.AddComponent<Missile>();
+
+        // 플레이어(기체) 속도보다 항상 빠르게: 현재/최대 속도 기반으로 미사일 속도 세팅
+        FlightSimulationController flight = GetComponent<FlightSimulationController>();
+        if (flight != null && missileComp != null)
         {
-            missile.AddComponent<Missile>();
+            float playerMax = Mathf.Max(
+                flight.dashSpeed,
+                flight.baseSpeed + flight.moveSpeed,
+                flight.baseSpeed
+            );
+
+            float desiredSpeed = Mathf.Max(missileMinSpeed, playerMax * Mathf.Max(1.0f, missileSpeedMultiplierOfPlayerMax));
+            missileComp.speed = Mathf.Max(missileComp.speed, desiredSpeed);
         }
         
         // 미사일 크기 설정
-        missile.transform.localScale = Vector3.one * 0.2f;
+        missile.transform.localScale = Vector3.one * (0.2f * Mathf.Max(0.01f, missileScaleMultiplier));
     }
     
     void CreateDefaultMissilePrefab()

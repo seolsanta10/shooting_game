@@ -199,6 +199,13 @@ public class Missile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // 보호막(파랑 아이템)과의 충돌은 무시 (보호막은 적 총알만 막고, 내 미사일은 통과)
+        if (other != null)
+        {
+            if (other.gameObject.name == "Shield" || other.GetComponentInParent<PlayerShield>() != null)
+                return;
+        }
+
         // 적 총알과 충돌 시
         if (other.gameObject.GetComponent<EnemyBullet>() != null)
         {

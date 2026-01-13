@@ -18,6 +18,7 @@ public class EnemyBullet : MonoBehaviour
     {
         // Ground 찾기
         GameObject ground = GameObject.Find("Ground");
+        if (ground == null) ground = GameObject.Find("지구");
         if (ground != null)
         {
             groundCenter = ground.transform;
@@ -161,14 +162,15 @@ public class EnemyBullet : MonoBehaviour
         }
         
         // 플레이어와 충돌 시
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.name == "Player" || other.CompareTag("Player"))
         {
-            // 플레이어에게 데미지 주기 (플레이어 스크립트에 데미지 함수가 있다고 가정)
-            // PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            // if (playerHealth != null)
-            // {
-            //     playerHealth.TakeDamage(damage);
-            // }
+            // 10대 맞으면 사라지게: 히트 기반 PlayerHealth
+            PlayerHealth ph = other.GetComponentInParent<PlayerHealth>();
+            if (ph == null) ph = other.GetComponent<PlayerHealth>();
+            if (ph != null)
+            {
+                ph.TakeHit(1);
+            }
             
             Destroy(gameObject);
         }

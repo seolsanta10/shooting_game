@@ -114,7 +114,7 @@ public class MonsterController : MonoBehaviour
     void Die()
     {
         // 스폰러에 알리기
-        MonsterSpawner spawner = FindObjectOfType<MonsterSpawner>();
+        MonsterSpawner spawner = FindAnyObjectByType<MonsterSpawner>();
         if (spawner != null)
         {
             spawner.OnMonsterKilled();

@@ -14,6 +14,7 @@ public class EnemyHealthBar : MonoBehaviour
     private Image healthBackground;
     private Canvas worldCanvas;
     private Camera mainCamera;
+    private bool hasDroppedItem = false;
     
     void Start()
     {
@@ -110,8 +111,18 @@ public class EnemyHealthBar : MonoBehaviour
     void CreateWorldCanvas()
     {
         // World Space Canvas 찾기
-        worldCanvas = FindObjectOfType<Canvas>();
-        if (worldCanvas == null || worldCanvas.renderMode != RenderMode.WorldSpace)
+        worldCanvas = null;
+        Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsSortMode.None);
+        foreach (Canvas c in canvases)
+        {
+            if (c != null && c.renderMode == RenderMode.WorldSpace)
+            {
+                worldCanvas = c;
+                break;
+            }
+        }
+
+        if (worldCanvas == null)
         {
             // World Space Canvas 생성
             GameObject canvasObj = new GameObject("WorldCanvas");
@@ -193,10 +204,22 @@ public class EnemyHealthBar : MonoBehaviour
         if (currentHealth <= 0f)
         {
             // 처치 카운트 증가
-            KillCounter killCounter = FindObjectOfType<KillCounter>();
+            KillCounter killCounter = FindAnyObjectByType<KillCounter>();
             if (killCounter != null)
             {
                 killCounter.AddKill();
+            }
+
+            // 아이템 드랍 (적 위치에 생성)
+            if (!hasDroppedItem)
+            {
+                hasDroppedItem = true;
+                Transform planet = null;
+                GameObject ground = GameObject.Find("Ground");
+                if (ground == null) ground = GameObject.Find("지구");
+                if (ground != null) planet = ground.transform;
+
+                ItemPickup.SpawnRandomItem(transform.position, planet);
             }
             
             // 적 파괴

@@ -18,8 +18,8 @@ public class FlightSimulationController : MonoBehaviour
     
     [Header("회전 설정")]
     public float smoothRotationSpeed = 5f;
-    public float qeRotationSpeed = 30f; // Q/E 키 회전 속도 (도/초)
-    public float qeFastTurnSpeed = 120f; // Q/E + Shift 고속 턴 속도 (도/초)
+    public float adTurnSpeed = 30f; // A/D 키 회전 속도 (도/초)
+    public float adFastTurnSpeed = 120f; // A/D + Shift 고속 턴 속도 (도/초)
     public float doubleTapWindow = 0.3f; // 더블 탭 인식 시간 (초)
     
     [Header("측면 회피 롤 설정")]
@@ -31,15 +31,6 @@ public class FlightSimulationController : MonoBehaviour
 
     [Tooltip("롤 중 측면 이동 속도 (미터/초)")]
     public float rollLateralSpeed = 20f;
-    
-    [Tooltip("회피 대쉬 시간 (초)")]
-    public float evadeDashDuration = 0.2f;
-    
-    [Tooltip("회피 대쉬 거리 (미터)")]
-    public float evadeDashDistance = 20f;
-    
-    [Tooltip("회피 대쉬 속도 (미터/초)")]
-    public float evadeDashSpeed = 100f;
     
     private float currentAltitude;
     private Vector3 currentDirection = Vector3.up;
@@ -124,20 +115,12 @@ public class FlightSimulationController : MonoBehaviour
         backTurnAbility = GetComponent<BackTurnAbility>();
         if (backTurnAbility == null)
         {
-            Debug.LogWarning("FlightSimulationController: BackTurnAbility를 찾을 수 없습니다. 자동으로 추가합니다...");
+            // 경고 메시지 제거 (자동 추가는 정상 동작)
             backTurnAbility = gameObject.AddComponent<BackTurnAbility>();
-            if (backTurnAbility != null)
-            {
-                Debug.Log("FlightSimulationController: BackTurnAbility 컴포넌트가 자동으로 추가되었습니다.");
-            }
-            else
+            if (backTurnAbility == null)
             {
                 Debug.LogError("FlightSimulationController: BackTurnAbility 컴포넌트 추가에 실패했습니다. 수동으로 추가해주세요.");
             }
-        }
-        else
-        {
-            Debug.Log("FlightSimulationController: BackTurnAbility를 찾았습니다.");
         }
     }
     
@@ -176,12 +159,15 @@ public class FlightSimulationController : MonoBehaviour
             mouse = Mouse.current;
         }
         
-        float horizontal = 0f;
         float vertical = 0f;
         
         // A + Space 또는 D + Space 조합 감지
         bool aAndSpace = keyboard.aKey.isPressed && keyboard.spaceKey.isPressed;
         bool dAndSpace = keyboard.dKey.isPressed && keyboard.spaceKey.isPressed;
+
+        // A + 우클릭 또는 D + 우클릭 조합 감지 (Space 대신 우클릭도 허용)
+        bool aAndRmb = keyboard.aKey.isPressed && mouse != null && mouse.rightButton.isPressed;
+        bool dAndRmb = keyboard.dKey.isPressed && mouse != null && mouse.rightButton.isPressed;
         
         // Space 키가 방금 눌렸을 때 A나 D가 눌려있는지 확인
         if (keyboard.spaceKey.wasPressedThisFrame && !isRolling)
@@ -199,6 +185,23 @@ public class FlightSimulationController : MonoBehaviour
                 StartCoroutine(SideEvadeRoll360(left: false));
             }
         }
+
+        // 마우스 우클릭이 방금 눌렸을 때 A나 D가 눌려있는지 확인
+        if (mouse != null && mouse.rightButton.wasPressedThisFrame && !isRolling)
+        {
+            // A + 우클릭: 좌측 측면 회피 롤
+            if (keyboard.aKey.isPressed)
+            {
+                Debug.Log("A + 우클릭 감지: 좌측 측면 회피 롤 시작");
+                StartCoroutine(SideEvadeRoll360(left: true));
+            }
+            // D + 우클릭: 우측 측면 회피 롤
+            else if (keyboard.dKey.isPressed)
+            {
+                Debug.Log("D + 우클릭 감지: 우측 측면 회피 롤 시작");
+                StartCoroutine(SideEvadeRoll360(left: false));
+            }
+        }
         
         // A 키가 방금 눌렸을 때 Space가 눌려있는지 확인 (추가 확인)
         if (keyboard.aKey.wasPressedThisFrame && keyboard.spaceKey.isPressed && !isRolling)
@@ -213,6 +216,20 @@ public class FlightSimulationController : MonoBehaviour
             Debug.Log("D + Space 감지 (D 먼저): 우측 측면 회피 롤 시작");
             StartCoroutine(SideEvadeRoll360(left: false));
         }
+
+        // A 키가 방금 눌렸을 때 우클릭이 눌려있는지 확인 (추가 확인)
+        if (mouse != null && keyboard.aKey.wasPressedThisFrame && mouse.rightButton.isPressed && !isRolling)
+        {
+            Debug.Log("A + 우클릭 감지 (A 먼저): 좌측 측면 회피 롤 시작");
+            StartCoroutine(SideEvadeRoll360(left: true));
+        }
+
+        // D 키가 방금 눌렸을 때 우클릭이 눌려있는지 확인 (추가 확인)
+        if (mouse != null && keyboard.dKey.wasPressedThisFrame && mouse.rightButton.isPressed && !isRolling)
+        {
+            Debug.Log("D + 우클릭 감지 (D 먼저): 우측 측면 회피 롤 시작");
+            StartCoroutine(SideEvadeRoll360(left: false));
+        }
         
         
         // 디버그: S와 Space 상태 확인 (필요시 주석 해제)
@@ -221,21 +238,26 @@ public class FlightSimulationController : MonoBehaviour
         //     Debug.Log($"S+Space 상태: S={keyboard.sKey.isPressed}, Space={keyboard.spaceKey.isPressed}, SpacePressed={keyboard.spaceKey.wasPressedThisFrame}");
         // }
         
-        // Q/E 키 회전 처리 (회전 중이 아닐 때만)
-        float qeRotation = 0f;
+        // A/D 키 회전 처리 (회전 중이 아닐 때만) - 기존 Q/E 턴을 A/D로 대체
+        float adTurnInput = 0f;
         bool isFastTurn = false; // Shift 키와 함께 눌렀는지 확인
         if (!isRolling)
         {
             bool shiftPressed = keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed;
             
-            if (keyboard.qKey.isPressed)
+            // 회피 롤 조합(A/D + Space/우클릭) 중에는 턴 입력을 받지 않음
+            if (aAndSpace || dAndSpace || aAndRmb || dAndRmb)
             {
-                qeRotation = -1f; // 왼쪽 회전
+                adTurnInput = 0f;
+            }
+            else if (keyboard.aKey.isPressed)
+            {
+                adTurnInput = -1f; // 왼쪽 회전
                 isFastTurn = shiftPressed; // Shift와 함께 누르면 고속 턴
             }
-            else if (keyboard.eKey.isPressed)
+            else if (keyboard.dKey.isPressed)
             {
-                qeRotation = 1f; // 오른쪽 회전
+                adTurnInput = 1f; // 오른쪽 회전
                 isFastTurn = shiftPressed; // Shift와 함께 누르면 고속 턴
             }
         }
@@ -307,15 +329,14 @@ public class FlightSimulationController : MonoBehaviour
             }
         }
         
-        // 일반 이동 입력 (회전 중이 아니고, A+Space나 D+Space 조합이 아니고, 백턴 중이 아닐 때만)
+        // 일반 이동 입력 (회전/회피 롤 조합 중이 아니고, 백턴 중이 아닐 때만)
         bool isBackTurningNow = backTurnAbility != null && backTurnAbility.IsBackTurning();
-        if (!isRolling && !aAndSpace && !dAndSpace && !isBackTurningNow)
+        if (!isRolling && !aAndSpace && !dAndSpace && !aAndRmb && !dAndRmb && !isBackTurningNow)
         {
             // W 키: 가속 (속도 증가)
             if (keyboard.wKey.isPressed) vertical = 1f;
             if (keyboard.sKey.isPressed) vertical = -1f;
-            if (keyboard.aKey.isPressed && !keyboard.spaceKey.isPressed) horizontal = -1f;
-            if (keyboard.dKey.isPressed && !keyboard.spaceKey.isPressed) horizontal = 1f;
+            // A/D는 턴(회전)으로 사용하므로, 좌우 이동(horizontal)은 사용하지 않음
         }
         
         // B 키: 부스터 (대쉬) - 부스터 게이지 확인
@@ -347,14 +368,14 @@ public class FlightSimulationController : MonoBehaviour
         // 지구 중심으로부터의 방향 벡터
         Vector3 directionFromPlanet = (transform.position - planetCenter.position).normalized;
         
-        // Q/E 키 회전 처리 (Y축 회전) - 백턴 중이 아닐 때만
-        bool isBackTurningForQE = backTurnAbility != null && backTurnAbility.IsBackTurning();
-        if (qeRotation != 0f && !isRolling && !isBackTurningForQE)
+        // A/D 키 회전 처리 (Y축 회전) - 백턴 중이 아닐 때만
+        bool isBackTurningForTurn = backTurnAbility != null && backTurnAbility.IsBackTurning();
+        if (adTurnInput != 0f && !isRolling && !isBackTurningForTurn)
         {
             // Y축 회전 (비행기의 Y축을 중심으로 회전)
             // Shift 키와 함께 누르면 고속 턴, 아니면 일반 회전
-            float currentRotationSpeed = isFastTurn ? qeFastTurnSpeed : qeRotationSpeed;
-            float rotationAngle = currentRotationSpeed * qeRotation * Time.deltaTime;
+            float currentRotationSpeed = isFastTurn ? adFastTurnSpeed : adTurnSpeed;
+            float rotationAngle = currentRotationSpeed * adTurnInput * Time.deltaTime;
             transform.Rotate(0f, rotationAngle, 0f, Space.Self);
         }
         
@@ -365,6 +386,11 @@ public class FlightSimulationController : MonoBehaviour
         if (vertical > 0f)
         {
             currentSpeed += moveSpeed;
+        }
+        // S 키를 누르면 1/2 속도로 감속 (뒤로 가지 않고, 전진 속도만 줄임)
+        else if (vertical < 0f)
+        {
+            currentSpeed *= 0.5f;
         }
         
         // 부스터 중이면 부스터 속도 사용
@@ -398,14 +424,10 @@ public class FlightSimulationController : MonoBehaviour
             }
         }
         
-        // 이동 방향 계산 (항상 전진 + 좌우 이동)
+        // 이동 방향 계산 (항상 전진)
         Vector3 moveDirection = forward; // 기본 전진 방향
         
-        // 좌우 이동 추가
-        if (horizontal != 0f)
-        {
-            moveDirection = (forward + right * horizontal).normalized;
-        }
+        // A/D는 턴(회전)이므로 좌우 이동은 하지 않음
         
         // 회피 롤 중이 아니면 일반 이동
         if (!isRolling)
@@ -438,9 +460,9 @@ public class FlightSimulationController : MonoBehaviour
             Vector3 up = directionFromPlanet;
             Vector3 flightForward = transform.forward;
             
-            // Q/E 회전 중이 아니고 백턴 중이 아니면 회전 업데이트
+            // A/D 턴 중이 아니고 백턴 중이 아니면 회전 업데이트
             bool isBackTurningForRotation = backTurnAbility != null && backTurnAbility.IsBackTurning();
-            if (qeRotation == 0f && !isBackTurningForRotation)
+            if (adTurnInput == 0f && !isBackTurningForRotation)
             {
                 // 항상 전진하므로 forward 방향 유지
                 Vector3 moveDir = Vector3.ProjectOnPlane(transform.forward, up).normalized;
@@ -457,9 +479,9 @@ public class FlightSimulationController : MonoBehaviour
             }
             else
             {
-                // Q/E 회전 중일 때는 Y축 회전만 하고, 회전 보정은 하지 않음
+                // A/D 턴 중일 때는 Y축 회전만 하고, 회전 보정은 하지 않음
                 // (회전 보정을 하면 방향이 반대로 되는 문제 발생)
-                // Y축 회전은 이미 224줄에서 처리되었으므로 여기서는 추가 보정 없음
+                // Y축 회전은 이미 위에서 처리되었으므로 여기서는 추가 보정 없음
             }
         }
     }

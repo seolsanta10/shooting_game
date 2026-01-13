@@ -31,6 +31,19 @@ public class BackTurnAbility : MonoBehaviour
     
     [Tooltip("회전 반경 배율 (더 크게 돌기)")]
     public float rotationRadiusMultiplier = 1.5f; // 회전 반경을 더 크게
+
+    [Header("이동(포지션) 설정")]
+    [Tooltip("덤블링 중 뒤로 이동 속도(m/s). 0이면 제자리 덤블링.")]
+    public float tumbleBackwardSpeed = 15f;
+
+    [Tooltip("덤블링 후 위협 적의 '후면'으로 이동할지 여부")]
+    public bool moveBehindThreatAfterTurn = true;
+
+    [Tooltip("위협 적 후면으로 이동할 거리 (m)")]
+    public float behindThreatDistance = 8f;
+
+    [Tooltip("위협 적 후면 이동에 걸리는 시간 (초)")]
+    public float behindThreatMoveDuration = 0.25f;
     
     [Tooltip("회전 가속 사용 여부")]
     public bool useRotationAcceleration = true;
@@ -136,7 +149,7 @@ public class BackTurnAbility : MonoBehaviour
         // 카메라 찾기
         if (cameraFollow == null)
         {
-            cameraFollow = FindObjectOfType<CameraFollow>();
+            cameraFollow = FindAnyObjectByType<CameraFollow>();
         }
         
         // 카메라가 없으면 경고
@@ -211,6 +224,12 @@ public class BackTurnAbility : MonoBehaviour
         
         // Phase C: 안정화 및 Exit Heading 정렬
         yield return StartCoroutine(PhaseC_Stabilize());
+
+        // Phase D: 위협 적 후면으로 이동 (Back Turn의 주 목적)
+        if (moveBehindThreatAfterTurn)
+        {
+            yield return StartCoroutine(PhaseD_MoveBehindThreat());
+        }
         
         isBackTurning = false;
         isOnCooldown = true;
@@ -282,14 +301,23 @@ public class BackTurnAbility : MonoBehaviour
         }
         
         float totalRotation = 0f;
-        float targetRotation = 360f;
         Vector3 rotationAxis = transform.right; // 오른쪽 축을 중심으로 회전 (뒤로 덤블링)
         
         Quaternion startRotation = transform.rotation;
         Vector3 startPosition = transform.position;
+        float startDistanceToPlanet = planetCenter != null ? Vector3.Distance(startPosition, planetCenter.position) : 0f;
+
+        // 덤블링 중 "뒤로" 이동 방향(표면 접선): 시작 방향 기준으로 고정
+        Vector3 startForwardOnSurface = Vector3.ProjectOnPlane(transform.forward, planetUp).normalized;
+        if (startForwardOnSurface.sqrMagnitude < 0.0001f)
+            startForwardOnSurface = Vector3.ProjectOnPlane(transform.right, planetUp).normalized;
+        Vector3 backwardDirOnSurface = (-startForwardOnSurface).normalized;
         
-        // 더 크게 돌기 위해 회전 반경 증가 (상승 중 회전)
-        float rotationRadius = ascentHeight * 0.3f * rotationRadiusMultiplier; // 회전 반경 배율 적용
+        // NOTE:
+        // 기존 코드는 startPosition + 원형 offset으로 포지션을 계산해서
+        // 360도 덤블링 후 다시 startPosition으로 "원점 회귀"하는 구조였음.
+        // Back Turn의 목적(쫓아오는 대상 후면으로 이동)을 위해 원형 경로 기반 위치 보정은 제거.
+        float rotationRadius = ascentHeight * 0.3f * rotationRadiusMultiplier; // 로그용
         
         float elapsedTime = 0f;
         float duration = phaseBDuration;
@@ -326,67 +354,59 @@ public class BackTurnAbility : MonoBehaviour
             if (useRigidbody && rb != null)
             {
                 rb.MoveRotation(stabilizedRotation);
-                
-                // 더 크게 돌기 위해 원형 경로 추가 (가속에 따라 반경도 증가)
-                if (rotationRadius > 0f && planetCenter != null)
+
+                // 덤블링 중 뒤로 이동 (행성 표면 유지)
+                if (tumbleBackwardSpeed > 0.01f)
                 {
-                    Vector3 centerToPlayer = (startPosition - planetCenter.position).normalized;
-                    Vector3 rightDir = Vector3.Cross(centerToPlayer, planetUp).normalized;
-                    Vector3 forwardDir = Vector3.Cross(rightDir, centerToPlayer).normalized;
-                    
-                    // 가속에 따라 반경도 증가 (회전이 빠를수록 더 큰 원)
-                    float currentRadius = rotationRadius;
-                    if (useRotationAcceleration)
+                    if (planetCenter != null && startDistanceToPlanet > 0.0001f)
                     {
-                        // 가속에 따라 반경 증가
-                        float radiusMultiplier = Mathf.Lerp(1f, 1.5f, t);
-                        currentRadius = rotationRadius * radiusMultiplier;
+                        Vector3 up = (rb.position - planetCenter.position).normalized;
+                        Vector3 moveDir = Vector3.ProjectOnPlane(backwardDirOnSurface, up).normalized;
+                        if (moveDir.sqrMagnitude > 0.0001f)
+                        {
+                            float angleMove = (tumbleBackwardSpeed * Time.deltaTime) / startDistanceToPlanet;
+                            Vector3 rotAxis = Vector3.Cross(up, moveDir).normalized;
+                            if (rotAxis.sqrMagnitude > 0.0001f)
+                            {
+                                Quaternion moveRot = Quaternion.AngleAxis(angleMove * Mathf.Rad2Deg, rotAxis);
+                                Vector3 newUp = (moveRot * up).normalized;
+                                rb.MovePosition(planetCenter.position + newUp * startDistanceToPlanet);
+                            }
+                        }
                     }
-                    
-                    // 원형 경로 계산
-                    float angle = totalRotation * Mathf.Deg2Rad;
-                    Vector3 offset = (rightDir * Mathf.Sin(angle) + forwardDir * Mathf.Cos(angle)) * currentRadius;
-                    Vector3 desiredPosition = startPosition + offset;
-                    
-                    // 행성 표면 위에 유지
-                    Vector3 directionFromPlanet = (desiredPosition - planetCenter.position).normalized;
-                    float currentDistance = Vector3.Distance(startPosition, planetCenter.position);
-                    desiredPosition = planetCenter.position + directionFromPlanet * currentDistance;
-                    
-                    rb.MovePosition(desiredPosition);
+                    else
+                    {
+                        rb.MovePosition(rb.position + backwardDirOnSurface * tumbleBackwardSpeed * Time.deltaTime);
+                    }
                 }
             }
             else
             {
                 transform.rotation = stabilizedRotation;
-                
-                // 더 크게 돌기 위해 원형 경로 추가 (가속에 따라 반경도 증가)
-                if (rotationRadius > 0f && planetCenter != null)
+
+                // 덤블링 중 뒤로 이동 (행성 표면 유지)
+                if (tumbleBackwardSpeed > 0.01f)
                 {
-                    Vector3 centerToPlayer = (startPosition - planetCenter.position).normalized;
-                    Vector3 rightDir = Vector3.Cross(centerToPlayer, planetUp).normalized;
-                    Vector3 forwardDir = Vector3.Cross(rightDir, centerToPlayer).normalized;
-                    
-                    // 가속에 따라 반경도 증가 (회전이 빠를수록 더 큰 원)
-                    float currentRadius = rotationRadius;
-                    if (useRotationAcceleration)
+                    if (planetCenter != null && startDistanceToPlanet > 0.0001f)
                     {
-                        // 가속에 따라 반경 증가
-                        float radiusMultiplier = Mathf.Lerp(1f, 1.5f, t);
-                        currentRadius = rotationRadius * radiusMultiplier;
+                        Vector3 up = (transform.position - planetCenter.position).normalized;
+                        Vector3 moveDir = Vector3.ProjectOnPlane(backwardDirOnSurface, up).normalized;
+                        if (moveDir.sqrMagnitude > 0.0001f)
+                        {
+                            float angleMove = (tumbleBackwardSpeed * Time.deltaTime) / startDistanceToPlanet;
+                            Vector3 rotAxis = Vector3.Cross(up, moveDir).normalized;
+                            if (rotAxis.sqrMagnitude > 0.0001f)
+                            {
+                                Quaternion moveRot = Quaternion.AngleAxis(angleMove * Mathf.Rad2Deg, rotAxis);
+                                Vector3 newUp = (moveRot * up).normalized;
+                                transform.position = planetCenter.position + newUp * startDistanceToPlanet;
+                            }
+                        }
                     }
-                    
-                    // 원형 경로 계산
-                    float angle = totalRotation * Mathf.Deg2Rad;
-                    Vector3 offset = (rightDir * Mathf.Sin(angle) + forwardDir * Mathf.Cos(angle)) * currentRadius;
-                    Vector3 desiredPosition = startPosition + offset;
-                    
-                    // 행성 표면 위에 유지
-                    Vector3 directionFromPlanet = (desiredPosition - planetCenter.position).normalized;
-                    float currentDistance = Vector3.Distance(startPosition, planetCenter.position);
-                    desiredPosition = planetCenter.position + directionFromPlanet * currentDistance;
-                    
-                    transform.position = desiredPosition;
+                    else
+                    {
+                        transform.position += backwardDirOnSurface * tumbleBackwardSpeed * Time.deltaTime;
+                    }
                 }
             }
             
@@ -406,6 +426,42 @@ public class BackTurnAbility : MonoBehaviour
         {
             cameraFollow.SetFirstPerson(wasFirstPerson);
             Debug.Log($"BackTurnAbility: 카메라를 원래 시점으로 복귀 (1인칭: {wasFirstPerson})");
+        }
+    }
+
+    IEnumerator PhaseD_MoveBehindThreat()
+    {
+        if (threatEnemy == null || planetCenter == null) yield break;
+
+        float currentDistance = Vector3.Distance(transform.position, planetCenter.position);
+        if (currentDistance < 0.0001f) yield break;
+
+        // 적 기준 up/forward(접선) 계산
+        Vector3 enemyUp = (threatEnemy.position - planetCenter.position).normalized;
+        Vector3 enemyForward = Vector3.ProjectOnPlane(threatEnemy.forward, enemyUp).normalized;
+        if (enemyForward.sqrMagnitude < 0.0001f)
+            enemyForward = Vector3.ProjectOnPlane(threatEnemy.right, enemyUp).normalized;
+
+        Vector3 targetWorld = threatEnemy.position - enemyForward.normalized * behindThreatDistance;
+        Vector3 targetUp = (targetWorld - planetCenter.position).normalized;
+
+        Vector3 startUp = (transform.position - planetCenter.position).normalized;
+        float elapsed = 0f;
+        float dur = Mathf.Max(0.05f, behindThreatMoveDuration);
+
+        while (elapsed < dur)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / dur);
+            Vector3 up = Vector3.Slerp(startUp, targetUp, t).normalized;
+            Vector3 pos = planetCenter.position + up * currentDistance;
+
+            if (useRigidbody && rb != null)
+                rb.MovePosition(pos);
+            else
+                transform.position = pos;
+
+            yield return null;
         }
     }
     
@@ -508,7 +564,7 @@ public class BackTurnAbility : MonoBehaviour
     /// </summary>
     Vector3 ComputeThreatAwareExitHeading()
     {
-        EnemyController[] enemies = FindObjectsOfType<EnemyController>();
+        EnemyController[] enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
         
         if (enemies.Length == 0)
         {

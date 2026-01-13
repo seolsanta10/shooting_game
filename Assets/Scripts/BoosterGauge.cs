@@ -98,7 +98,7 @@ public class BoosterGauge : MonoBehaviour
     void CreateBoosterGaugeUI()
     {
         // Canvas 찾기 또는 생성
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = FindAnyObjectByType<Canvas>();
         if (canvas == null)
         {
             GameObject canvasObj = new GameObject("Canvas");
@@ -149,7 +149,8 @@ public class BoosterGauge : MonoBehaviour
         textRect.anchoredPosition = Vector2.zero;
         
         gaugeText = textObj.AddComponent<Text>();
-        gaugeText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        // Unity 최신 버전: Arial.ttf 내장 폰트 제거됨 → LegacyRuntime.ttf 사용
+        gaugeText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         gaugeText.fontSize = 14;
         gaugeText.color = Color.white;
         gaugeText.alignment = TextAnchor.MiddleCenter;

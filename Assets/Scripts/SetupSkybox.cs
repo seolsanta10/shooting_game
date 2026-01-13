@@ -20,7 +20,7 @@ public class SetupSkybox : MonoBehaviour
         }
         
         // 모든 카메라의 Clear Flags를 Skybox로 설정
-        Camera[] cameras = FindObjectsOfType<Camera>();
+        Camera[] cameras = FindObjectsByType<Camera>(FindObjectsSortMode.None);
         foreach (Camera cam in cameras)
         {
             cam.clearFlags = CameraClearFlags.Skybox;

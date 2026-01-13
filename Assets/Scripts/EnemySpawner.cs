@@ -20,10 +20,26 @@ public class EnemySpawner : MonoBehaviour
     
     void Start()
     {
+        // 전역 프리팹 설정(있으면) 적용
+        GamePrefabSettings settings = GamePrefabSettings.LoadOrNull();
+        if (settings != null)
+        {
+            if (enemyPrefabs == null) enemyPrefabs = new List<GameObject>();
+            if (enemyPrefabs.Count == 0 && settings.enemyPrefabs != null && settings.enemyPrefabs.Count > 0)
+                enemyPrefabs.AddRange(settings.enemyPrefabs);
+
+            if (enemyBulletPrefab == null && settings.enemyBulletPrefab != null)
+                enemyBulletPrefab = settings.enemyBulletPrefab;
+        }
+
         // Ground 찾기
         if (groundCenter == null)
         {
             GameObject ground = GameObject.Find("Ground");
+            if (ground == null)
+            {
+                ground = GameObject.Find("지구");
+            }
             if (ground != null)
             {
                 groundCenter = ground.transform;

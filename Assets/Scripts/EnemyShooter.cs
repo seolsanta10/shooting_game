@@ -15,6 +15,13 @@ public class EnemyShooter : MonoBehaviour
     
     void Start()
     {
+        // 전역 프리팹 설정(있으면) 적용
+        GamePrefabSettings settings = GamePrefabSettings.LoadOrNull();
+        if (settings != null && bulletPrefab == null && settings.enemyBulletPrefab != null)
+        {
+            bulletPrefab = settings.enemyBulletPrefab;
+        }
+
         // 플레이어 찾기
         GameObject player = GameObject.Find("Player");
         if (player != null)
@@ -24,6 +31,7 @@ public class EnemyShooter : MonoBehaviour
         
         // Ground 찾기
         GameObject ground = GameObject.Find("Ground");
+        if (ground == null) ground = GameObject.Find("지구");
         if (ground != null)
         {
             groundCenter = ground.transform;
